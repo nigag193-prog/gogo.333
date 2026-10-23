@@ -324,4 +324,4 @@ def register(bot):
             started["v"] = True
             bot.add_view(PanelView(bot))                                   # the public panels survive a restart
 
-    bot.on_ready = on_ready
+    bot.on_ready = on_ready1
