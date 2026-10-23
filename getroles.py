@@ -114,8 +114,15 @@ class ClaimSelect(discord.ui.Select):
     def __init__(self, bot, roles=None, member=None, custom_id=None):
         self.bot = bot
         opts = _options(roles, member, with_state=member is not None) if roles else [discord.SelectOption(label="(roles)", value="0")]
-        super().__init__(custom_id=custom_id, placeholder="🎭 Choose your roles", min_values=1,
-                         max_values=max(1, len(opts)), options=opts)
+        kwargs = {
+            "placeholder": "🎭 Choose your roles",
+            "min_values": 1,
+            "max_values": max(1, len(opts)),
+            "options": opts,
+        }
+        if custom_id is not None:
+            kwargs["custom_id"] = custom_id
+        super().__init__(**kwargs)
 
     async def callback(self, interaction):
         await toggle(self.bot, interaction, self.values)
