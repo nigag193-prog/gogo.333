@@ -1,0 +1,9 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+gemini_keys.txt
+__pycache__/
+*.py[cod]
+.venv/
+venv/

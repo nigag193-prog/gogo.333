@@ -1,0 +1,186 @@
+{
+  "1557041856376995952": {
+    "welcome": {
+      "channel_id": 1558556753468326010,
+      "auto_role_id": null,
+      "message": "Welcome to {server}, {user}! 👋 Please read the welcome here, then go to #verify and press **Verify me** to get ✅ Member and unlock the server. 🎉"
+    },
+    "verification": {
+      "unverified_role_id": 1558556730408042607,
+      "verified_role_id": 1558556721373384916,
+      "channel_id": 1558556734145044542,
+      "text": "اضغط على الزر باش تاخذ ✅ Member ويتحيد منك 🔒 Unverified وتتحل ليك القنوات.",
+      "button_label": "Verify me"
+    },
+    "logs": {
+      "channel_id": 1558556858266943642,
+      "channels": {
+        "voice": 1558556866450292817,
+        "messages": 1558556863975522439,
+        "members": 1558556862159388702,
+        "mod": 1558556867842543676,
+        "server": 1558556869016952974
+      }
+    },
+    "staff_role_ids": [
+      1558149944655749165,
+      1558149946392314016,
+      1558556710933897356,
+      1558556711776813150,
+      1558556712888307715
+    ],
+    "custom_vc": {
+      "trigger_id": 1558556790206243001,
+      "name_format": "🔒 Private ┃ {name}"
+    },
+    "assistant": {
+      "channel_id": 1558556763660492921,
+      "member_role_id": 1558556721373384916,
+      "max_role_id": 1558556716218716262,
+      "exclude_ids": [
+        1558556725597184033,
+        1558556727345942568,
+        1558556729178988544,
+        1558556730408042607
+      ]
+    },
+    "freegames": {
+      "channel_id": 1558948282368008202
+    },
+    "deals": {
+      "channel_id": 1558948385329914030
+    },
+    "live": {
+      "channel_id": 1558948496462061658,
+      "ping_role_id": 1557041856376995952
+    },
+    "antinuke": {
+      "enabled": true
+    },
+    "backup": {
+      "auto": true
+    },
+    "stay_voice": {
+      "channel_id": 1558556749114642572
+    },
+    "kb": {
+      "channel_ids": [
+        1558556757134151700,
+        1558556753468326010,
+        1558556755284205720
+      ]
+    },
+    "protected_roles": [
+      1560760978759753874
+    ],
+    "weather": {
+      "channel_id": 1561827007313223790,
+      "message_id": 1562872868176527454,
+      "units": "f"
+    },
+    "football": {
+      "channel_id": 1562873622350012437,
+      "message_id": 1562873751975108719
+    },
+    "prayer": {
+      "channel_id": 1562874432089759844,
+      "message_id": 1562874629553528933
+    },
+    "currency": {
+      "channel_id": 1562875073042448484,
+      "message_id": 1562875196447395951
+    }
+  },
+  "1557737034070884545": {
+    "welcome": {
+      "channel_id": 1558562680460025916,
+      "auto_role_id": null,
+      "message": "Welcome to {server}, {user}! 👋 Please read the welcome here, then go to #verify and press **Verify me** to get ✅ Member and unlock the server. 🎉"
+    },
+    "verification": {
+      "unverified_role_id": 1558551152512213073,
+      "verified_role_id": 1558551143930667212,
+      "channel_id": 1558562660352659506,
+      "text": "اضغط على الزر باش تاخذ ✅ Member ويتحيد منك 🔒 Unverified وتتحل ليك القنوات.",
+      "button_label": "Verify me"
+    },
+    "logs": {
+      "channel_id": 1558562770293624913,
+      "channels": {
+        "voice": 1558562780032794694,
+        "messages": 1558562775062806629,
+        "members": 1558562773212860578,
+        "mod": 1558562781308002434,
+        "server": 1558562782658437191
+      }
+    },
+    "staff_role_ids": [
+      1558551118403993620,
+      1558551119406563362,
+      1558551120467460180,
+      1558551122535383161,
+      1558551126834679828
+    ],
+    "custom_vc": {
+      "trigger_id": 1558562718754144447,
+      "name_format": "🔒 Private ┃ {name}"
+    },
+    "assistant": {
+      "channel_id": 1558562691323531386,
+      "member_role_id": 1558551143930667212,
+      "max_role_id": 1558551129388748945,
+      "exclude_ids": [
+        1558551148619628545,
+        1558551149605425237,
+        1558551150654132306,
+        1558551152512213073
+      ]
+    },
+    "kb": {
+      "channel_ids": [
+        1558562680460025916,
+        1558562682003791952,
+        1558562683375325385
+      ]
+    }
+  },
+  "1560740235334123632": {
+    "welcome": {
+      "channel_id": 1562208917860393062,
+      "auto_role_id": 1562208906812457130,
+      "message": "Welcome to {server}, {user}! 👋 Press **Verify me** in #verify to unlock the server. 🎉"
+    },
+    "verification": {
+      "unverified_role_id": 1562208906812457130,
+      "verified_role_id": 1562208910348386325,
+      "channel_id": 1562208912973893802,
+      "text": "Welcome! 👋 Press the button below to verify yourself and unlock the whole server.",
+      "button_label": "Verify me"
+    },
+    "logs": {
+      "channel_id": 1562208933144301599,
+      "channels": {
+        "voice": 1562208938106163311,
+        "messages": 1562208936487161897,
+        "members": 1562208934951919686,
+        "mod": 1562208940022825055,
+        "server": 1562208941243629608
+      }
+    },
+    "staff_role_ids": [],
+    "custom_vc": {
+      "trigger_id": 1562208930162278542,
+      "name_format": "🔒 Private ┃ {name}"
+    },
+    "assistant": {
+      "channel_id": 1562208920767037461,
+      "member_role_id": 1562208910348386325
+    },
+    "external": {},
+    "kb": {
+      "channel_ids": [
+        1562208917860393062
+      ]
+    }
+  }
+}

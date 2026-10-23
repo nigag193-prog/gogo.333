@@ -1,0 +1,19 @@
+# Linux service: keeps the bot running and restarts it if it crashes.
+# Edit User and the two paths, then:
+#   sudo cp hermanos-bot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now hermanos-bot
+#   journalctl -u hermanos-bot -f      (live logs)
+[Unit]
+Description=HERMANOS Discord bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=YOUR_LINUX_USER
+WorkingDirectory=/home/YOUR_LINUX_USER/discord_ai_builder
+ExecStart=/home/YOUR_LINUX_USER/discord_ai_builder/venv/bin/python run_bot.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

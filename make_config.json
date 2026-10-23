@@ -1,0 +1,1377 @@
+{
+  "server_snapshot_version": 3,
+  "server_name": "HERMANOS",
+  "server_id": "1557041856376995952",
+  "roles": [
+    {
+      "name": "👑 Owner",
+      "color": "#ffd700",
+      "permissions": "none",
+      "permissions_value": 8864258447638527,
+      "hoist": true,
+      "mentionable": true,
+      "position": 21
+    },
+    {
+      "name": "💫 [HR] Founder",
+      "color": "#f1c40f",
+      "permissions": "none",
+      "permissions_value": 8864258447638519,
+      "hoist": true,
+      "mentionable": true,
+      "position": 19
+    },
+    {
+      "name": "⚡ Admin",
+      "color": "#c0392b",
+      "permissions": "none",
+      "permissions_value": 4351568723312583,
+      "hoist": true,
+      "mentionable": true,
+      "position": 17
+    },
+    {
+      "name": "🔰 Mod",
+      "color": "#2980b9",
+      "permissions": "none",
+      "permissions_value": 4359531458459457,
+      "hoist": true,
+      "mentionable": true,
+      "position": 15
+    },
+    {
+      "name": "🤝 Helper",
+      "color": "#27ae60",
+      "permissions": "none",
+      "permissions_value": 4350383178121025,
+      "hoist": true,
+      "mentionable": true,
+      "position": 13
+    },
+    {
+      "name": "🔥 [HR] OG",
+      "color": "#e67e22",
+      "permissions": "none",
+      "permissions_value": 4332885481355073,
+      "hoist": true,
+      "mentionable": false,
+      "position": 11
+    },
+    {
+      "name": "🌟 [HR] Legend",
+      "color": "#f39c12",
+      "permissions": "none",
+      "permissions_value": 954618812553025,
+      "hoist": false,
+      "mentionable": true,
+      "position": 10
+    },
+    {
+      "name": "💖 [HR] Girls",
+      "color": "#ff69b4",
+      "permissions": "none",
+      "permissions_value": 321059579496193,
+      "hoist": true,
+      "mentionable": false,
+      "position": 9
+    },
+    {
+      "name": "🎮 [HR] Gamer",
+      "color": "#3498db",
+      "permissions": "none",
+      "permissions_value": 1025,
+      "hoist": false,
+      "mentionable": false,
+      "position": 8
+    },
+    {
+      "name": "🤍 [HR] Friends",
+      "color": "#2ecc71",
+      "permissions": "none",
+      "permissions_value": 391428323743489,
+      "hoist": false,
+      "mentionable": false,
+      "position": 7
+    },
+    {
+      "name": "✅ Member",
+      "color": "#95a5a6",
+      "permissions": "none",
+      "permissions_value": 110088638940993,
+      "hoist": false,
+      "mentionable": false,
+      "position": 6
+    },
+    {
+      "name": "🎥 [HR] Streamer",
+      "color": "#9146ff",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": true,
+      "mentionable": false,
+      "position": 5
+    },
+    {
+      "name": "🚀 [HR] Booster",
+      "color": "#f47fff",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": true,
+      "mentionable": false,
+      "position": 4
+    },
+    {
+      "name": "⚠️ Warn 1",
+      "color": "#e6b800",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": false,
+      "mentionable": false,
+      "position": 3
+    },
+    {
+      "name": "⚠️ Warn 2",
+      "color": "#e67e22",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": false,
+      "mentionable": false,
+      "position": 2
+    },
+    {
+      "name": "⚠️ Warn 3",
+      "color": "#922b21",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": false,
+      "mentionable": false,
+      "position": 1
+    },
+    {
+      "name": "🔒 Unverified",
+      "color": "#95a5a6",
+      "permissions": "none",
+      "permissions_value": 0,
+      "hoist": false,
+      "mentionable": false,
+      "position": 0
+    }
+  ],
+  "categories": [
+    {
+      "name": "✅ VERIFICATION",
+      "permission_overwrites": [],
+      "position": 0,
+      "channels": [
+        {
+          "name": "✅・verify",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            },
+            {
+              "target_type": "role",
+              "target": "🔒 Unverified",
+              "target_id": "0",
+              "allow": 66560,
+              "deny": 2048
+            }
+          ],
+          "position": 0,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Press the button below to verify yourself and unlock the server."
+        }
+      ]
+    },
+    {
+      "name": "👑 OWNERS",
+      "permission_overwrites": [],
+      "position": 1,
+      "channels": [
+        {
+          "name": "👑・owner-chat",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1024,
+              "deny": 0
+            }
+          ],
+          "position": 1,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Private space for the owners."
+        },
+        {
+          "name": "🤖・owner-bot-commands",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1024,
+              "deny": 0
+            }
+          ],
+          "position": 2,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Bot commands and tests."
+        },
+        {
+          "name": "📂・owner-files",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1024,
+              "deny": 0
+            }
+          ],
+          "position": 3,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Private files."
+        },
+        {
+          "name": "🔐・Owners Voice",
+          "type": "voice",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1049600
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1049600,
+              "deny": 0
+            }
+          ],
+          "position": 0,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🔐・Owners Voice 2",
+          "type": "voice",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1049600
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1049600,
+              "deny": 0
+            }
+          ],
+          "position": 1,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ],
+      "show_locked": true
+    },
+    {
+      "name": "🔒 STAFF",
+      "permission_overwrites": [],
+      "position": 2,
+      "channels": [
+        {
+          "name": "🔒・hermanos-chat",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1024,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1024,
+              "deny": 0
+            }
+          ],
+          "position": 4,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Staff discussion."
+        },
+        {
+          "name": "🛠️・HERMANOS 1",
+          "type": "voice",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1049600
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔥 [HR] OG",
+              "target_id": "1557430556130545839",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1049600,
+              "deny": 0
+            }
+          ],
+          "position": 2,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🛠️・HERMANOS 2",
+          "type": "voice",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1049600
+            },
+            {
+              "target_type": "role",
+              "target": "⚡ Admin",
+              "target_id": "1557430546962059324",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🤝 Helper",
+              "target_id": "1557430550078165059",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔰 Mod",
+              "target_id": "1557430548492980295",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "🔥 [HR] OG",
+              "target_id": "1557430556130545839",
+              "allow": 1049600,
+              "deny": 0
+            },
+            {
+              "target_type": "role",
+              "target": "💫 [HR] Founder",
+              "target_id": "1557430545506377849",
+              "allow": 1049600,
+              "deny": 0
+            }
+          ],
+          "position": 3,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ],
+      "show_locked": true
+    },
+    {
+      "name": "📌 INFORMATION",
+      "permission_overwrites": [],
+      "position": 3,
+      "channels": [
+        {
+          "name": "👋・welcome",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 5,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Welcome to the server."
+        },
+        {
+          "name": "📜・rules",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 6,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Read the rules before chatting."
+        },
+        {
+          "name": "📢・announcements",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 7,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Official announcements."
+        },
+        {
+          "name": "🆕・updates",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 8,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Server updates and changelog."
+        },
+        {
+          "name": "🎭・get-roles",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 9,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Pick your roles with the buttons."
+        },
+        {
+          "name": "🎫・support",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 10,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Open a private ticket with the staff."
+        }
+      ]
+    },
+    {
+      "name": "🤖 GOGO",
+      "permission_overwrites": [],
+      "position": 4,
+      "channels": [
+        {
+          "name": "🤖・ask-gogo",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 11,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Press Start Chat to open a private conversation with GOGO."
+        }
+      ]
+    },
+    {
+      "name": "💬 COMMUNITY",
+      "permission_overwrites": [],
+      "position": 5,
+      "channels": [
+        {
+          "name": "💬・general",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 12,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Main chat."
+        },
+        {
+          "name": "🙋・introduce-yourself",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 13,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Say hi and tell us about you."
+        },
+        {
+          "name": "😂・memes",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 14,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Memes only."
+        },
+        {
+          "name": "🎬・media-and-clips",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 15,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Share your clips and screenshots."
+        },
+        {
+          "name": "🕹️・gaming-discussion",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 16,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Talk about any game."
+        }
+      ]
+    },
+    {
+      "name": "🎉 ENGAGEMENT",
+      "permission_overwrites": [],
+      "position": 6,
+      "channels": [
+        {
+          "name": "❓・qotd",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 17,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Question of the day."
+        },
+        {
+          "name": "🔢・counting",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 18,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Count together."
+        },
+        {
+          "name": "📊・polls",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 19,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Community polls."
+        },
+        {
+          "name": "💡・suggestions",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 20,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Suggest ideas for the server."
+        },
+        {
+          "name": "📰・news",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 21,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Gaming and tech news."
+        }
+      ]
+    },
+    {
+      "name": "🎮 GAMES",
+      "permission_overwrites": [],
+      "position": 7,
+      "channels": [
+        {
+          "name": "🤝・lfg",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 22,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Looking for a team? Use /lfg."
+        },
+        {
+          "name": "🎯・valorant",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 23,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Valorant chat."
+        },
+        {
+          "name": "🪂・fortnite",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 24,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Fortnite chat."
+        },
+        {
+          "name": "⛏️・minecraft",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 25,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Minecraft chat."
+        },
+        {
+          "name": "📣・self-promo",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 26,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Promote your content here."
+        }
+      ]
+    },
+    {
+      "name": "➕・Create Room",
+      "permission_overwrites": [],
+      "position": 8,
+      "channels": [
+        {
+          "name": "➕・Create Room",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 4,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🔒 Private ┃ adam",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 5,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "🎧 VOICE",
+      "permission_overwrites": [],
+      "position": 9,
+      "channels": [
+        {
+          "name": "🔊・Lounge 1",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 5,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🔊・Lounge 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 6,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🔊・Lounge 3",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 7,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎵・Music",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 8,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🍿・Movie Night",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 9,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "📚・Study & Work",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 10,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎙️・Podcast",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 11,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "👥・Duo 1",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 12,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "👥・Duo 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 13,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎮・Trio 1",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 14,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎮・Trio 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 15,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎮・Squad 1",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 16,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎮・Squad 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 17,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎮・Squad 3",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 18,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "🏆 EVENTS",
+      "permission_overwrites": [],
+      "position": 10,
+      "channels": [
+        {
+          "name": "🏆・tournaments",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 27,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Tournaments and challenges."
+        },
+        {
+          "name": "⭐・clips-of-the-week",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 2048
+            }
+          ],
+          "position": 28,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Best clips, voted with ⭐."
+        },
+        {
+          "name": "🎤・Stage",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 19,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "💎 VIP LOUNGE",
+      "permission_overwrites": [],
+      "position": 11,
+      "channels": [
+        {
+          "name": "💎・vip-chat",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 29,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "VIP members only."
+        },
+        {
+          "name": "🎁・perks-and-giveaways",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 30,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "VIP perks and giveaways."
+        },
+        {
+          "name": "🥂・VIP Lounge",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 20,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🥂・VIP Lounge 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 21,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "💖 GIRLS ZONE",
+      "permission_overwrites": [],
+      "position": 12,
+      "channels": [
+        {
+          "name": "💖・girls-chat",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 31,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Girls only."
+        },
+        {
+          "name": "📸・girls-media",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 32,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Photos and media."
+        },
+        {
+          "name": "🎀・Girls Lounge",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 22,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🎀・Girls Lounge 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 23,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "🤍 FRIENDS",
+      "permission_overwrites": [],
+      "position": 13,
+      "channels": [
+        {
+          "name": "🤍・friends-chat",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 33,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Friends only."
+        },
+        {
+          "name": "📷・friends-media",
+          "type": "text",
+          "permission_overwrites": [],
+          "position": 34,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Photos and media."
+        },
+        {
+          "name": "🍻・Friends Lounge",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 24,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        },
+        {
+          "name": "🍻・Friends Lounge 2",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 25,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    },
+    {
+      "name": "📋 LOGS",
+      "permission_overwrites": [],
+      "position": 14,
+      "channels": [
+        {
+          "name": "📋・logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 35,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "General logs."
+        },
+        {
+          "name": "👥・member-logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 36,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Joins and leaves."
+        },
+        {
+          "name": "💬・message-logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 37,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Edited and deleted messages."
+        },
+        {
+          "name": "🎙️・voice-logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 38,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Voice activity."
+        },
+        {
+          "name": "🛡️・mod-logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 39,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Moderation actions."
+        },
+        {
+          "name": "🏗️・server-logs",
+          "type": "text",
+          "permission_overwrites": [
+            {
+              "target_type": "role",
+              "target": "@everyone",
+              "target_id": "1557041856376995952",
+              "allow": 0,
+              "deny": 1024
+            }
+          ],
+          "position": 40,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "topic": "Channel and role changes."
+        }
+      ],
+      "show_locked": true
+    },
+    {
+      "name": "💤 AFK",
+      "permission_overwrites": [],
+      "position": 15,
+      "channels": [
+        {
+          "name": "💤・AFK",
+          "type": "voice",
+          "permission_overwrites": [],
+          "position": 26,
+          "nsfw": false,
+          "slowmode_delay": 0,
+          "bitrate": 64000,
+          "user_limit": 0
+        }
+      ]
+    }
+  ],
+  "welcome": {
+    "channel": "👋・welcome",
+    "message": "Welcome to {server}, {user}! 👋 Please read the welcome here, then go to #verify and press **Verify me** to get ✅ Member and unlock the server. 🎉"
+  },
+  "assistant": {
+    "channel": "🤖・ask-gogo",
+    "member_role": "✅ Member",
+    "max_role": "🌟 [HR] Legend",
+    "exclude_roles": [
+      "⚠️ Warn 1",
+      "⚠️ Warn 2",
+      "⚠️ Warn 3",
+      "🔒 Unverified"
+    ]
+  },
+  "logs": {
+    "channel": "📋・logs",
+    "members": "👥・member-logs",
+    "messages": "💬・message-logs",
+    "voice": "🎙️・voice-logs",
+    "mod": "🛡️・mod-logs",
+    "server": "🏗️・server-logs"
+  },
+  "verification": {
+    "channel": "✅・verify",
+    "unverified_role": "🔒 Unverified",
+    "verified_role": "✅ Member",
+    "text": "اضغط على الزر باش تاخذ ✅ Member ويتحيد منك 🔒 Unverified وتتحل ليك القنوات.",
+    "button_label": "Verify me"
+  }
+}

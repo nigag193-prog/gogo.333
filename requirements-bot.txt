@@ -1,0 +1,7 @@
+discord.py>=2.4
+requests
+pillow
+PyNaCl
+davey
+edge-tts
+imageio-ffmpeg
