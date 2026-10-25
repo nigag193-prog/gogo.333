@@ -237,6 +237,18 @@ async def loop(bot):
         await asyncio.sleep(CACHE_SECONDS)
 
 
+async def install(bot, guild, channel):
+    """Post the currency panel in `channel` and remember it (used by the automatic setup)."""
+    try:
+        info = await asyncio.to_thread(get_rates)
+    except Exception:
+        info = None
+    msg = await channel.send(embed=panel_embed(info), view=PanelView())
+    bot.config.setdefault(str(guild.id), {})["currency"] = {"channel_id": channel.id, "message_id": msg.id}
+    bot.persist()
+    return msg
+
+
 def register(bot):
     group = app_commands.Group(name="currency", description="Currency converter", guild_only=True)
 
