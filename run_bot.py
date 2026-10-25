@@ -571,6 +571,8 @@ def main():
                            ("football", "/football setup #channel"),
                            ("getroles", "/get role, /get config, /get panel"),
                            ("helpcmd", "/help"),
+                           ("onboard", "smart setup when the bot joins a server"),
+                           ("quran", "24/7 Quran radio, control panel and ayah of the day"),
                            ("automation", "scheduled tasks, temporary roles and voice announcements (tell GOGO)")):
         try:
             __import__(mod_name).register(bot)
