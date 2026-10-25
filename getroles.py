@@ -161,7 +161,8 @@ class ClaimSelect(discord.ui.Select):
         self.bot = bot
         opts = _options(roles, member) if roles else [discord.SelectOption(label="(roles)", value="0")]
         label = "🎭 Choose your roles" + (f" ({index + 1}/{total})" if total > 1 else "")
-        super().__init__(custom_id=custom_id, placeholder=label, min_values=1, max_values=max(1, len(opts)), options=opts)
+        extra = {"custom_id": custom_id} if custom_id else {}       # discord.py refuses custom_id=None: leave it out
+        super().__init__(placeholder=label, min_values=1, max_values=max(1, len(opts)), options=opts, **extra)
 
     async def callback(self, interaction):
         await toggle(self.bot, interaction, self.values)
