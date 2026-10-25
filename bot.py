@@ -12,6 +12,7 @@ import discord
 from discord import app_commands
 
 import assistant
+import antispam_guard
 import extras
 import rolesys
 
@@ -153,6 +154,7 @@ class ServerBot(discord.Client):
         extras.register(self)
         assistant.register(self)
         rolesys.register(self)
+        antispam_guard.register(self)
 
     async def setup_hook(self):
         self.add_view(TicketPanel())
@@ -487,6 +489,8 @@ class ServerBot(discord.Client):
         if await rolesys.anti_insult(self, message):
             return
         if await self.check_antispam(message):
+            return
+        if await antispam_guard.on_message(self, message):
             return
         if message.content.startswith("!") and len(message.content) > 1:
             if await rolesys.guard_command(self, message):
