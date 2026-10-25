@@ -214,6 +214,26 @@ class ResultView(discord.ui.View):
 
 
 # ---------------------------------------------------------------- commands
+async def install(bot, guild, channel):
+    """Post the prayer-times panel in `channel` and remember it (used by the automatic setup)."""
+    emb = discord.Embed(title="🕌  Prayer times", color=0x1B2A5C,
+                        description="Pick a **region** in the menu below, then your **city**.\n"
+                                    "You get the 5 prayers, the **next prayer** with a countdown, and the method used.")
+    file = None
+    try:
+        import prayer_card
+        gif, _ = await asyncio.to_thread(prayer_card.render_gif, "Prayer Times", "Pick your city below", [], None, "", "")
+        file = discord.File(io.BytesIO(gif), filename="banner.gif")
+        emb.set_image(url="attachment://banner.gif")
+    except Exception as e:
+        print(f"[prayer] banner not drawn: {e}")
+    emb.set_footer(text="Times by AlAdhan.com")
+    msg = await channel.send(embed=emb, view=PanelView(), **({"file": file} if file else {}))
+    bot.config.setdefault(str(guild.id), {})["prayer"] = {"channel_id": channel.id, "message_id": msg.id}
+    bot.persist()
+    return msg
+
+
 def register(bot):
     group = app_commands.Group(name="prayer", description="Prayer times", guild_only=True)
 
