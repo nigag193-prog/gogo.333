@@ -421,6 +421,19 @@ async def loop(bot):
 
 
 # ---------------------------------------------------------------- commands
+async def install(bot, guild, channel, units="c"):
+    """Post the weather panel in `channel` and remember it (used by the automatic setup)."""
+    cities = [c for c in (find_city(n) for n in FEATURED) if c]
+    try:
+        board = await asyncio.to_thread(fetch_board, cities, units)
+    except Exception:
+        board = []
+    msg = await channel.send(embed=panel_embed(board, units), view=PanelView())
+    bot.config.setdefault(str(guild.id), {})["weather"] = {"channel_id": channel.id, "message_id": msg.id, "units": units}
+    bot.persist()
+    return msg
+
+
 def register(bot):
     group = app_commands.Group(name="weather", description="Weather menu", guild_only=True)
 
