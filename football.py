@@ -269,6 +269,19 @@ async def loop(bot):
         await asyncio.sleep(600)
 
 
+async def install(bot, guild, channel):
+    """Post the football panel in `channel` and remember it (used by the automatic setup)."""
+    day, matches = today(), None
+    try:
+        matches = await asyncio.to_thread(fetch, day, "ALL")
+    except Exception:
+        pass
+    msg = await channel.send(embed=panel_embed(matches, day), view=PanelView())
+    bot.config.setdefault(str(guild.id), {})["football"] = {"channel_id": channel.id, "message_id": msg.id}
+    bot.persist()
+    return msg
+
+
 def register(bot):
     group = app_commands.Group(name="football", description="Football matches", guild_only=True)
     choices = [app_commands.Choice(name=n, value=c) for c, n, e in COMPS]
