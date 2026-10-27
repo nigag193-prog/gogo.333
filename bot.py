@@ -15,6 +15,7 @@ import assistant
 import antispam_guard
 import extras
 import rolesys
+import rolecard, welcomecard
 
 from modules import (APP_DIR, DB, RolePanel, TicketClose, TicketPanel, VerifyPanel,
                      handle_command, level_for)
