@@ -155,6 +155,8 @@ class ServerBot(discord.Client):
         assistant.register(self)
         rolesys.register(self)
         antispam_guard.register(self)
+        welcomecard.register(self)
+        rolecard.register(self)
 
     async def setup_hook(self):
         self.add_view(TicketPanel())
