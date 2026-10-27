@@ -30,6 +30,7 @@ import math
 import os
 import random
 import re
+import sys
 
 import discord
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
@@ -356,7 +357,13 @@ def register(bot):
     (no need to edit bot.py to remove the old banner code)."""
     if hasattr(bot, "_welcome_banner"):
         bot._welcome_banner = lambda *a, **k: None
-        bot.log("[welcomecard] old static banner disabled (_welcome_banner)")
+    try:
+        mod = sys.modules.get(type(bot).__module__)
+        if mod is not None and hasattr(mod, "_welcome_banner"):
+            mod._welcome_banner = lambda *a, **k: None
+            bot.log("[welcomecard] old static banner disabled (module-level _welcome_banner)")
+    except Exception:
+        pass
     original = getattr(bot, "on_member_join", None)
 
     async def on_member_join(member):
