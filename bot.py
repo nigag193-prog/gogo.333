@@ -332,15 +332,11 @@ class ServerBot(discord.Client):
             if channel and not self.external(guild, "welcome"):
                 text = cfg["message"].replace("{user}", member.mention).replace("{server}", guild.name)
                 try:
-                    banner = _welcome_banner()
-                    if banner:   # text + banner image inside an embed
-                        embed = discord.Embed(color=0xFFFFFF)
-                        embed.set_image(url=f"attachment://{banner.filename}")
-                        await channel.send(text, embed=embed, file=banner)
-                    else:
-                        await channel.send(text)
+                    await channel.send(text)
                 except discord.HTTPException:
                     pass
+                # (static banner removed: welcomecard.py sends the animated
+                #  personalized GIF right after this message)
         age = (discord.utils.utcnow() - member.created_at).days
         await self.event_log(
             guild, "members", "📥 Member joined", f"{member.mention} ({member})", 0x2ECC71,
