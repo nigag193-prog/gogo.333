@@ -44,13 +44,13 @@ import discord
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 W, H = 1280, 540
-FRAMES = 24
-DURATION = 85
+FRAMES = 12
+DURATION = 170
 STAR_COUNT = 55
 EMBER_COUNT = 42
 SPEED_LINES = 16
-PALETTE_COLORS = 96
-PALETTE_COLORS_BG = 56   # smaller palette when a photo-like background is used
+PALETTE_COLORS = 64
+PALETTE_COLORS_BG = 48   # smaller palette when a photo-like background is used
 DEFAULT_THEME = ("#ff2d55", "#ff9f0a", "#ffd60a")     # crimson / orange / gold
 DEDUPE_WINDOW = 90        # seconds: never send a second banner for the same member
 
