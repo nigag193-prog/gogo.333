@@ -8,7 +8,13 @@ On member join GOGO sends an animated GIF (loops forever) for the new member:
   * red accent bars under the name that keep shimmering,
   * the member's DISPLAY NAME under it in gold,
   * his Discord PROFILE PICTURE on the side inside a rotating golden ring,
-  * rising embers, twinkling stars, red light streaks (HERMANOS-style design).
+  * rising embers, twinkling stars, anime SPEED LINES,
+  * OPTIONAL ANIMATED BACKGROUND: put an ANIMATED GIF named welcome_bg.gif
+    next to bot.py OR inside the assets folder -> the clip plays behind the
+    text. (A static welcome_bg.png/jpg works too: it gets a Ken-Burns zoom/pan.)
+
+Duplicate protection: if two bot instances run with the same token (GUI + VPS
+for example), a small shared file makes sure each member only gets ONE banner.
 
 Optional per-server theme in guild_config.json:
     "welcome": {..., "card": true, "theme": ["#ff2d55", "#ff9f0a", "#ffd60a"]}
@@ -21,16 +27,18 @@ antispam_guard.register(self)) add:
     welcomecard.register(self)
     rolecard.register(self)
 
-register() also DISABLES the old static banner by neutralizing bot._welcome_banner,
-so you do NOT have to edit bot.py to remove it.
+register() also DISABLES the old static banner by neutralizing bot._welcome_banner
+and the module-level _welcome_banner, so you do NOT have to edit bot.py.
 """
 import asyncio
 import io
+import json
 import math
 import os
 import random
 import re
 import sys
+import time
 
 import discord
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
@@ -40,8 +48,11 @@ FRAMES = 24
 DURATION = 85
 STAR_COUNT = 55
 EMBER_COUNT = 42
+SPEED_LINES = 16
 PALETTE_COLORS = 96
+PALETTE_COLORS_BG = 56   # smaller palette when a photo-like background is used
 DEFAULT_THEME = ("#ff2d55", "#ff9f0a", "#ffd60a")     # crimson / orange / gold
+DEDUPE_WINDOW = 90        # seconds: never send a second banner for the same member
 
 _FONTS = ["/usr/share/fonts/truetype/dejavu/DejaVuSans{b}.ttf",
           "/usr/share/fonts/dejavu/DejaVuSans{b}.ttf",
@@ -50,6 +61,9 @@ _FONTS = ["/usr/share/fonts/truetype/dejavu/DejaVuSans{b}.ttf",
           "C:/Windows/Fonts/segoeui{w}.ttf",
           "C:/Windows/Fonts/arial{w}.ttf"]
 _EMOJI = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\uFE0F\u200d\u20E3]")
+
+_BASE = os.path.dirname(os.path.abspath(__file__))
+_SENT_FILE = os.path.join(_BASE, "welcome_sent.json")
 
 
 def _font(size, bold=True):
@@ -117,6 +131,65 @@ def _glow_sprite(color, r, alpha=80):
     return s.filter(ImageFilter.GaussianBlur(r // 3))
 
 
+_BG_CACHE = {}
+BG_SAMPLES = 18        # frames sampled from an animated welcome_bg.gif
+
+
+def _flatten(img):
+    img = img.filter(ImageFilter.GaussianBlur(0.6))
+    return img.quantize(colors=48).convert("RGB")
+
+
+def _load_bg():
+    """-> (frames, animated).
+
+    welcome_bg.GIF first (an animated anime clip plays behind the text), then
+    welcome_bg.png/jpg (static image, gets the Ken-Burns zoom/pan instead).
+    Searched next to this file and in the assets folder. Frames are cover-fitted,
+    color-flattened and cached, so the final GIF stays under Discord's 8 MB."""
+    # --- animated gif
+    for folder in (_BASE, os.path.join(_BASE, "assets")):
+        p = os.path.join(folder, "welcome_bg.gif")
+        if not os.path.isfile(p):
+            continue
+        try:
+            mtime = os.path.getmtime(p)
+            if (p, mtime) in _BG_CACHE:
+                return _BG_CACHE[(p, mtime)]
+            img = Image.open(p)
+            n = getattr(img, "n_frames", 1)
+            count = min(BG_SAMPLES, n)
+            frames = []
+            for i in range(count):
+                img.seek(int(round(i * (n - 1) / max(1, count - 1))))
+                fr = img.convert("RGB")
+                scale = max(W / fr.width, H / fr.height)
+                fr = fr.resize((int(fr.width * scale) + 1,
+                                int(fr.height * scale) + 1), Image.LANCZOS)
+                # cover-crop to exactly W x H
+                ox = (fr.width - W) // 2
+                oy = (fr.height - H) // 2
+                frames.append(_flatten(fr.crop((ox, oy, ox + W, oy + H))))
+            _BG_CACHE[(p, mtime)] = (frames, True)
+            return frames, True
+        except Exception:
+            return None, False
+    # --- static image
+    for name in ("welcome_bg.png", "welcome_bg.jpg", "welcome_bg.jpeg"):
+        for folder in (_BASE, os.path.join(_BASE, "assets")):
+            p = os.path.join(folder, name)
+            if os.path.isfile(p):
+                try:
+                    img = Image.open(p).convert("RGB")
+                    scale = max((W + 140) / img.width, (H + 90) / img.height)
+                    img = img.resize((int(img.width * scale) + 1,
+                                      int(img.height * scale) + 1), Image.LANCZOS)
+                    return [_flatten(img)], False
+                except Exception:
+                    return None, False
+    return None, False
+
+
 def _draw_rainbow_welcome(d, cx, y, f_w, colors):
     """Draw 'WELCOME TO' letter by letter, each letter a gradient color.
     Returns the total width (used for the gold side lines)."""
@@ -155,7 +228,6 @@ def _build_title(server_name, member_name, cx, theme):
     d = ImageDraw.Draw(t)
     gold = (255, 205, 90)
     max_w = 860
-    # --- "WELCOME TO" big, rainbow gradient letters
     f_w = _font(48, True)
     colors = _rainbow_colors(9, theme)
     total = _draw_rainbow_welcome(d, cx, 104, f_w, colors)
@@ -163,33 +235,39 @@ def _build_title(server_name, member_name, cx, theme):
         x0 = cx + side * (total / 2 + 22)
         x1 = cx + side * (total / 2 + 130)
         d.line([(x0, 104), (x1, 104)], fill=gold + (190,), width=3)
-    # --- SERVER NAME huge (red glow + white fill + shine sweep applied later)
     srv = _EMOJI.sub("", server_name).strip() or "SERVER"
     f_srv = _fit(d, srv, 104, max_w)
     d.text((cx, 252), srv, font=f_srv, fill=(255, 255, 255, 255), anchor="mm")
-    # --- member name under it
     shaped = _shape(_EMOJI.sub("", str(member_name)).strip() or str(member_name))
     f_name = _fit(d, shaped, 52, max_w)
     d.text((cx, 382), shaped, font=f_name, fill=gold + (255,), anchor="mm")
     return t, t.filter(ImageFilter.GaussianBlur(14))
 
 
-def render_welcome_gif(server_name, member_name, member_number, avatar_png=None, theme=None):
-    """-> GIF bytes: personalized, animated, HERM-style welcome banner."""
+def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
+                       theme=None, bg_image=None):
+    """-> GIF bytes: personalized, animated, anime-style welcome banner."""
     theme = [_hex(c) for c in (theme or DEFAULT_THEME)]
     crimson = theme[0]
     orange = theme[1] if len(theme) > 1 else theme[0]
     gold = (255, 205, 90)
     rng = random.Random(str(member_name)[:64])
 
-    bg = Image.new("RGBA", (W, H))
-    bd = ImageDraw.Draw(bg)
+    if bg_image is None:
+        bg_frames, bg_animated = _load_bg()
+    else:
+        bg_frames, bg_animated = [bg_image], False
+    bg_image = bg_frames
+
+    # generated fallback background (dark + diagonal streaks)
+    gen_bg = Image.new("RGBA", (W, H))
+    gd = ImageDraw.Draw(gen_bg)
     for y in range(H):
         k = y / H
-        bd.line([(0, y), (W, y)], fill=(int(8 + 8 * k), int(5 + 5 * k), int(10 + 8 * k), 255))
+        gd.line([(0, y), (W, y)], fill=(int(8 + 8 * k), int(5 + 5 * k), int(10 + 8 * k), 255))
     for i in range(6):
         x = 60 + i * 220
-        bd.polygon([(x, 0), (x + 26, 0), (x - 120, H), (x - 146, H)],
+        gd.polygon([(x, 0), (x + 26, 0), (x - 120, H), (x - 146, H)],
                    fill=crimson + (10 + (i % 3) * 5,))
 
     stars = [(rng.uniform(30, W - 30), rng.uniform(24, H - 24),
@@ -200,6 +278,14 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
                        "sp": rng.uniform(2.2, 4.6), "s": rng.uniform(1.2, 3.2),
                        "ph": rng.uniform(0, 6.283),
                        "c": orange if rng.random() < 0.6 else crimson})
+    # anime speed lines: fan from the right side towards the text
+    lines = []
+    for i in range(SPEED_LINES):
+        a = math.radians(190 + i * (160 / SPEED_LINES))   # fan across the card
+        lines.append({"a": a, "len": rng.uniform(180, 380),
+                      "x0": rng.uniform(700, 1240), "y0": rng.uniform(60, 480),
+                      "ph": rng.uniform(0, 6.283),
+                      "c": (255, 255, 255) if i % 3 else crimson})
 
     AV = 190
     avatar_img = _circle_avatar(avatar_png, AV) if avatar_png else None
@@ -215,12 +301,10 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
         av_glow = av_glow2 = None
 
     title, title_glow = _build_title(server_name, str(member_name), cx, theme)
-    # precomputed sprites for the animated backlight behind the title
     back_glow = _glow_sprite(crimson, 240, alpha=70)
     back_glow2 = _glow_sprite(orange, 180, alpha=50)
     f_small = _font(22, True)
 
-    # server name width -> animated accent bars under it
     probe = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     srv = _EMOJI.sub("", str(server_name)).strip() or "SERVER"
     f_srv = _fit(probe, srv, 104, 860)
@@ -229,10 +313,30 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
 
     frames_out = []
     for f in range(FRAMES):
-        im = bg.copy()
         phase = 2 * math.pi * (f / FRAMES)
 
-        # --- animated backlight behind the title (pulsing + breathing light)
+        # --- background: animated gif frame, or static image with Ken-Burns zoom/pan
+        if bg_image is not None:
+            if bg_animated:
+                im = bg_image[(f * len(bg_image)) // FRAMES].copy().convert("RGBA")
+            else:
+                zw = 1.06 + 0.05 * math.sin(phase)
+                cw, chh = int(W * zw), int(H * zw)
+                maxx, maxy = bg_image[0].width - cw, bg_image[0].height - chh
+                ox = int(maxx / 2 + (maxx / 2) * 0.6 * math.sin(phase + 0.9))
+                oy = int(maxy / 2 + (maxy / 2) * 0.6 * math.sin(2 * phase + 1.7))
+                im = bg_image[0].crop((ox, oy, ox + cw, oy + chh)).resize((W, H), Image.LANCZOS)
+                im = im.convert("RGBA")
+            im.alpha_composite(Image.new("RGBA", (W, H), (6, 3, 8, 105)))
+            shade = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            sd = ImageDraw.Draw(shade)
+            for x in range(0, int(W * 0.62)):      # darker under the text zone
+                a = int(100 * (1 - x / (W * 0.62)))
+                sd.line([(x, 0), (x, H)], fill=(0, 0, 0, a))
+            im.alpha_composite(shade)
+        else:
+            im = gen_bg.copy()
+
         pulse = 0.5 + 0.5 * math.sin(phase)
         breathe = 1.0 + 0.06 * math.sin(phase * 2)
         bw = int(back_glow.width * breathe)
@@ -248,6 +352,18 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
             gl3.putalpha(gl3.split()[3].point(lambda a: int(a * pulse)))
             im.alpha_composite(gl3, (axc - av_glow.width // 2, ayc - av_glow.height // 2))
             im.alpha_composite(av_glow2, (axc - av_glow2.width // 2, ayc - av_glow2.height // 2))
+
+        # --- anime speed lines (radiating action streaks)
+        sl = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        sd2 = ImageDraw.Draw(sl)
+        for ln in lines:
+            ext = ln["len"] * (0.7 + 0.3 * math.sin(phase * 2 + ln["ph"]))
+            a = ln["a"] + 0.03 * math.sin(phase + ln["ph"])
+            x1 = ln["x0"] + math.cos(a) * ext
+            y1 = ln["y0"] + math.sin(a) * ext
+            alpha = int(28 + 42 * (0.5 + 0.5 * math.sin(phase * 2 + ln["ph"])))
+            sd2.line([(ln["x0"], ln["y0"]), (x1, y1)], fill=ln["c"] + (alpha,), width=3)
+        im.alpha_composite(sl.filter(ImageFilter.GaussianBlur(1)))
 
         # --- embers + stars
         ov = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -275,7 +391,6 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
                 rd.arc([ax - 12, ay - 12, ax + AV + 12, ay + AV + 12],
                        start=s0, end=s0 + 68, fill=gold + (255,), width=6)
 
-        # --- animated accent bars under the server name (shimmering)
         rd = ImageDraw.Draw(im)
         shim = 0.5 + 0.5 * math.sin(phase)
         shim2 = 0.5 + 0.5 * math.sin(phase + math.pi)
@@ -286,7 +401,6 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
             rd.line([(x0, 304), (x0 + side * 90, 304)], fill=crimson + (a1,), width=6)
             rd.line([(x0, 318), (x0 + side * 60, 318)], fill=crimson + (a2,), width=3)
 
-        # --- title glow + moving shine sweep
         im.alpha_composite(title_glow)
         band = Image.new("L", (W, H), 0)
         bnd = ImageDraw.Draw(band)
@@ -305,7 +419,8 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
                 fill=gold + (255,), anchor="rm")
         frames_out.append(im.convert("RGB"))
 
-    pal = frames_out[0].quantize(colors=PALETTE_COLORS)
+    pal = frames_out[0].quantize(colors=PALETTE_COLORS_BG if bg_image is not None
+                                 else PALETTE_COLORS)
     qframes = [fr.quantize(palette=pal) for fr in frames_out]
     out = io.BytesIO()
     qframes[0].save(out, format="GIF", save_all=True, append_images=qframes[1:],
@@ -313,8 +428,33 @@ def render_welcome_gif(server_name, member_name, member_number, avatar_png=None,
     return out.getvalue()
 
 
+# ---------- duplicate protection (two bot instances, same token) ----------
+def _recently_sent(member_id):
+    """Shared (file-based) check so a second bot process skips the same member."""
+    try:
+        with open(_SENT_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        data = {}
+    now = time.time()
+    data = {k: v for k, v in data.items() if now - float(v) < 3600}
+    if now - float(data.get(str(member_id), 0)) < DEDUPE_WINDOW:
+        return True
+    data[str(member_id)] = now
+    try:
+        tmp = _SENT_FILE + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(data, f)
+        os.replace(tmp, _SENT_FILE)
+    except Exception:
+        pass
+    return False
+
+
 async def send_welcome(bot, member):
     guild = member.guild
+    if _recently_sent(member.id):
+        return
     cfg = (bot.config.get(str(guild.id)) or {}).get("welcome") or {}
     if cfg.get("card") is False:
         return
@@ -353,8 +493,8 @@ async def send_welcome(bot, member):
 
 def register(bot):
     """Wraps on_member_join: original handler first (welcome text), then the GIF.
-    Also DISABLES the old static banner by neutralizing bot._welcome_banner
-    (no need to edit bot.py to remove the old banner code)."""
+    Also DISABLES the old static banner by neutralizing bot._welcome_banner and the
+    module-level _welcome_banner (no need to edit bot.py)."""
     if hasattr(bot, "_welcome_banner"):
         bot._welcome_banner = lambda *a, **k: None
     try:
