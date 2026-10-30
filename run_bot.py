@@ -1,3 +1,4 @@
+
 """Run the bot on a SERVER (no window). One file, no PC app needed.
 
 At every start it:
@@ -482,6 +483,13 @@ def main():
         async def on_ready(self):
             await super().on_ready()
             await self._leave_unallowed()
+
+            # GOGO startup and GitHub update announcements
+            try:
+                import updatefeed
+                await updatefeed.on_ready(self)
+            except Exception as e:
+                print(f"[updates] Error: {type(e).__name__}: {e}")
 
         async def on_guild_join(self, guild):
             await self._leave_unallowed()
