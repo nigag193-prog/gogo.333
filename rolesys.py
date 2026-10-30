@@ -18,6 +18,18 @@ SELF_CLAIM_ROLE_ORDER = [
     "🎥 [HR] Streamer",
 ]
 
+# Hermanos animated emojis for the public role panel.
+# The bot finds them by name in the server; IDs are not required.
+ROLE_PANEL_EMOJIS = {
+    "🌟 [HR] Legend": "hermanos_lion_king",
+    "🎮 [HR] Gamer": "508330dance",
+    "🤍 [HR] Friends": "hermanos_brothers_handshake",
+    "🎥 [HR] Streamer": "hermanos_shadow",
+}
+
+PANEL_DECORATION_EMOJI = "746660koleksi"
+
+
 INSULT_WORDS = {
     "fuck", "fucking", "shit", "bitch", "asshole", "idiot", "stupid", "retard",
     "pute", "putain", "merde", "connard", "connasse", "salope",
@@ -57,6 +69,28 @@ def _role_emoji_and_label(role):
         emoji = None
 
     return emoji, label[:80]
+
+
+def _panel_emoji(role):
+    """Get the configured animated Hermanos emoji for this role."""
+    emoji_name = ROLE_PANEL_EMOJIS.get(role.name)
+
+    if emoji_name:
+        emoji = discord.utils.get(role.guild.emojis, name=emoji_name)
+        if emoji is not None:
+            return emoji
+
+    # Keep the original role emoji as fallback.
+    fallback, _ = _role_emoji_and_label(role)
+    return fallback
+
+
+def _panel_decoration(guild):
+    """Get the extra animated emoji used in the panel title."""
+    return discord.utils.get(
+        guild.emojis,
+        name=PANEL_DECORATION_EMOJI,
+    )
 
 
 def init_tables(conn):
@@ -412,7 +446,8 @@ class _RolePanelView(discord.ui.View):
         from modules import RoleButton
 
         for role in roles[:25]:
-            emoji, label = _role_emoji_and_label(role)
+            _, label = _role_emoji_and_label(role)
+            emoji = _panel_emoji(role)
 
             button = RoleButton(role.id, label)
 
@@ -485,12 +520,20 @@ def register(bot):
         lines = []
 
         for role in allowed:
-            emoji, label = _role_emoji_and_label(role)
+            _, label = _role_emoji_and_label(role)
+            emoji = _panel_emoji(role)
             prefix = str(emoji) if emoji else "🎭"
             lines.append(f"{prefix} **{label}**")
 
+        decoration = _panel_decoration(guild)
+        panel_title = (
+            f"{decoration} CHOOSE YOUR ROLES"
+            if decoration
+            else "🎭 CHOOSE YOUR ROLES"
+        )
+
         embed = discord.Embed(
-            title="🎭 CHOOSE YOUR ROLES",
+            title=panel_title,
             description=(
                 "اختار الرولات اللي بغيتي من الأزرار لتحت.\n"
                 "ضغط مرة أخرى على نفس الزر باش تحيد الرول.\n\n"
