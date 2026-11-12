@@ -1,15 +1,61 @@
+"""GOGO Music - YouTube music player with a control panel.
+
+Fits the GOGO architecture: the main bot is a plain discord.Client (no commands.Bot,
+no cogs), so this module exposes register(bot) which wires the /music slash command
+into the existing CommandTree - same pattern as welcomecard / rolecard.
+
+Install:
+  1)  pip install yt-dlp          (ffmpeg is already required by quran.py)
+  2)  put this file next to bot.py and add in ServerBot.__init__ (under the
+      other register calls):
+          import music
+          music.register(self)
+  3)  restart - slash commands are re-synced at startup by on_ready.
+
+YouTube anti-bot support:
+  - Optional cookies.txt (or YOUTUBE_COOKIES_FILE) is passed to yt-dlp.
+  - Optional bgutil PO-token provider plugin can generate fresh per-video tokens.
+    The provider service must be running at YOUTUBE_POT_BASE_URL (default localhost:4416).
+  - These may help, but cannot guarantee access from a blocked datacenter IP.
+"""
 import asyncio
+import os
+from pathlib import Path
+
 import discord
 import yt_dlp
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
+
+# Optional YouTube cookies. Keep this file private; it contains session credentials.
+_MODULE_DIR = Path(__file__).resolve().parent
+_cookie_setting = os.getenv("YOUTUBE_COOKIES_FILE", "cookies.txt").strip()
+_cookie_path = Path(_cookie_setting).expanduser()
+if not _cookie_path.is_absolute():
+    _cookie_path = _MODULE_DIR / _cookie_path
 
 YDL_OPTIONS = {
     "format": "bestaudio/best",
     "quiet": True,
     "no_warnings": True,
     "noplaylist": True,
+    # mweb is the recommended client when using a PO-token provider.
+    "extractor_args": {
+        "youtube": {"player_client": ["mweb", "tv", "web_safari"]},
+    },
 }
+
+if _cookie_path.is_file():
+    YDL_OPTIONS["cookiefile"] = str(_cookie_path)
+    print(f"[music] YouTube cookies enabled: {_cookie_path.name}")
+else:
+    print("[music] No YouTube cookies file found; continuing without cookies")
+
+# Optional bgutil provider HTTP endpoint. The provider plugin uses localhost:4416
+# by default, so this is only needed when it runs at another address/port.
+_pot_url = os.getenv("YOUTUBE_POT_BASE_URL", "").strip()
+if _pot_url:
+    YDL_OPTIONS["extractor_args"].setdefault("youtubepot-bgutilhttp", {})["base_url"] = [_pot_url]
 
 FFMPEG_OPTIONS = {
     "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
