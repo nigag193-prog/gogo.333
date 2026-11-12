@@ -1,21 +1,3 @@
-"""GOGO Music - YouTube music player with a control panel.
-
-Fits the GOGO architecture: the main bot is a plain discord.Client (no commands.Bot,
-no cogs), so this module exposes register(bot) which wires the /music slash command
-into the existing CommandTree - same pattern as welcomecard / rolecard.
-
-Install:
-  1)  pip install yt-dlp          (ffmpeg is already required by quran.py)
-  2)  put this file next to bot.py and add in ServerBot.__init__ (under the
-      other register calls):
-          import music
-          music.register(self)
-  3)  restart - slash commands are re-synced at startup by on_ready.
-
-NOTE: YouTube sometimes blocks streams from datacenter IPs. If playback fails with
-"Sign in to confirm you're not a bot", the VPS IP is flagged - the fix is passing
-cookies to yt-dlp, tell me and I will add cookie support.
-"""
 import asyncio
 import discord
 import yt_dlp
