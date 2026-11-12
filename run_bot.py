@@ -581,7 +581,8 @@ def main():
                            ("helpcmd", "/help"),
                            ("onboard", "smart setup when the bot joins a server"),
                            ("quran", "24/7 Quran radio, control panel and ayah of the day"),
-                           ("automation", "scheduled tasks, temporary roles and voice announcements (tell GOGO)")):
+                           ("automation", "scheduled tasks, temporary roles and voice announcements (tell GOGO)"),
+                           ("music", "music player with interactive controls")):
         try:
             __import__(mod_name).register(bot)
             print(f"[{mod_name}] ready: {hint}")
