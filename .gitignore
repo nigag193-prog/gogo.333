@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 gemini_keys.txt
+cookies.txt
 __pycache__/
 *.py[cod]
 .venv/
